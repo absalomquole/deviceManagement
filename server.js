@@ -27,7 +27,7 @@ app.use(express.static(__dirname + '/dist'));
 
 // For all GET requests, send back index.html
 // so that PathLocationStrategy can be used
-app.get('/sendMail', router);
+app.get('/', router);
 
 router.use('/', handleSayHello);
 
