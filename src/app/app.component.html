@@ -1,3 +1,4 @@
+<app-header></app-header>
 <h1 [attr.haha]="isTrue">
     {{name}}
 </h1>
@@ -8,3 +9,4 @@
 <ul>
     <li *ngFor="let item of items" (click)="newClickReg(item.name)">{{item.name}} {{item.class}}</li>
 </ul>
+<app-footer></app-footer>

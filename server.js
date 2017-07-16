@@ -27,7 +27,7 @@ app.use(express.static(__dirname + '/dist'));
 
 // For all GET requests, send back index.html
 // so that PathLocationStrategy can be used
-app.get('/', router);
+app.get('/api/sendnewmail', router);
 
 router.use('/', handleSayHello);
 
@@ -38,6 +38,9 @@ app.get('/*', function(req, res) {
 function handleSayHello(eq, res, next) {
     var transporter = nodemailer.createTransport({
         service: 'Gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
             user: 'ddblrdevicelab@gmail.com',
             pass: 'Deloitte_1234'

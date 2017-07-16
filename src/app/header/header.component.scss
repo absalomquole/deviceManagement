@@ -1,0 +1,44 @@
+.header-bar {
+    height: 70px;
+    width: 100%;
+    .header-logo {
+        height: 100%;
+        width: 13%;
+        float: left;
+        h3 {
+            padding-left: 27px;
+            padding-right: 12px;
+            font-weight: 200;
+            span:nth-child(2) {
+                color: #2c98f0;
+            }
+        }
+    }
+    .header-menu {
+        width: 87%;
+        float: left;
+        height: 100%;
+        border-bottom: 4px solid #2c98f0;
+        padding-right: 15px;
+        .header-whitespace {
+            width: 20%;
+            float: left;
+            height: 100%;
+        }
+        .header-column {
+            height: 100%;
+            width: 10%;
+            float: left;
+            padding-top: 20px;
+            text-align: center;
+            &:hover {
+                background: #2c98f0;
+                color: #fff;
+                ;
+            }
+        }
+        .selected {
+            color: #2c98f0;
+        }
+    }
+}
