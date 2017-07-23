@@ -1,12 +1,15 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var dbURI;
+const config = require('./src/config/database'); // get db config file
+const device = require('./src/controllers/deviceDataController');
 
-// If an incoming request uses
-// a protocol other than HTTPS,
-// redirect that request to the
-// same url but with HTTPS
 const router = express.Router();
+
+
 const forceSSL = function() {
     return function(req, res, next) {
         if (req.headers['x-forwarded-proto'] !== 'https') {
@@ -16,58 +19,55 @@ const forceSSL = function() {
     }
 }
 
-// Instruct the app
-// to use the forceSSL
-// middleware
-app.use(forceSSL());
 
-// Run the app by serving the static files
-// in the dist directory
+//app.use(forceSSL());//use when pushing code to heroku
+
 app.use(express.static(__dirname + '/dist'));
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+app.use(bodyParser.json());
+
+
+
+app.get('/', function(req, res) {
+    res.send('Hello! The API is at http://localhost:' + 8080 + '/api');
+});
+
+// if(process.env.NODE_ENV =='Development'){
+//     dbURI = config.development.db;
+// }else{
+//     dbURI = config.local.db;
+// }
+dbURI = config.development.db;
+console.log('dbURI' + dbURI);
+mongoose.connect(dbURI);
+
+
+
+
+
+//******************************Start of API Calls*****************************************
+
+// Get a list of all registered leaders
+router.use('/api/deviceData', device.getDeviceData);
+router.use('/api/requestDevice', device.requestDevice);
+//******************************End of API Calls*****************************************
+
+app.use('/', router);
+
+
+console.log(process.env.NODE_ENV);
 
 // For all GET requests, send back index.html
 // so that PathLocationStrategy can be used
-app.get('/api/sendnewmail', router);
-
-router.use('/', handleSayHello);
-
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/dist/index.html'));
-});
-
-function handleSayHello(eq, res, next) {
-    var transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-            user: 'ddblrdevicelab@gmail.com',
-            pass: 'Deloitte_1234'
-        }
-    });
-    var text = 'Hello world from \n\n';
-
-    var mailOptions = {
-        from: 'ddblrdevicelab@gmail.com', // sender address
-        to: 'shubhampramanick93@gmail.com', // list of receivers
-        subject: 'Email Example', // Subject line
-        text: text //, // plaintext body
-            // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
-    };
-    transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-            console.log(error);
-            res.json({ yo: 'error' });
-        } else {
-            console.log('Message sent: ' + info.response);
-            res.json({ yo: info.response });
-        };
-    });
-    next();
-
-}
+// app.get('/*', function(req, res) {
+//     res.sendFile(path.join(__dirname + '/dist/index.html'));
+// });
 
 // Start the app by listening on the default
 // Heroku port
 app.listen(process.env.PORT || 8080);
+console.log(process.env.PORT)
