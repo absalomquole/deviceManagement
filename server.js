@@ -20,7 +20,7 @@ const forceSSL = function() {
 }
 
 
-//app.use(forceSSL());//use when pushing code to heroku
+app.use(forceSSL()); //use when pushing code to heroku
 
 app.use(express.static(__dirname + '/dist'));
 
