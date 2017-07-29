@@ -5,7 +5,7 @@
     "scripts": {
         "ng": "ng",
         "start": "npm install --save mongoose && node server.js",
-        "postinstall": "ng build --aot -prod",
+        "postinstall": "npm -v",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
