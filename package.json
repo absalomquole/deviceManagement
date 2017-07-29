@@ -1,12 +1,16 @@
 {
     "name": "device-lab",
-    "version": "3.0.0",
+    "version": "0.0.0",
     "license": "MIT",
     "scripts": {
         "ng": "ng",
         "start": "npm install --save mongoose && node server.js",
-        "postinstall": "ng build --prod",
+        "postinstall": "ng build --aot -prod",
         "build": "ng build",
+        "test": "ng test",
+        "lint": "ng lint",
+        "e2e": "ng e2e",
+        "deploy": "sudo git push origin master && sudo git push heroku master",
         "dev": "ng build --aot -prod && node server.js"
     },
     "private": true,
@@ -45,13 +49,14 @@
         "karma-coverage-istanbul-reporter": "^0.2.0",
         "karma-jasmine": "~1.1.0",
         "karma-jasmine-html-reporter": "^0.2.2",
+
         "protractor": "~5.1.0",
         "ts-node": "~2.0.0",
         "tslint": "~4.5.0",
         "typescript": "~2.2.0"
     },
     "engines": {
-        "node": "6.11.1",
-        "npm": "3.10.9"
+        "node": "8.1.4",
+        "npm": "5.0.3"
     }
 }
