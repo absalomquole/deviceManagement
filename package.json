@@ -5,15 +5,14 @@
     "scripts": {
         "ng": "ng",
         "start": "npm install --save mongoose && node server.js",
-        "postinstall": "ng build --aot -prod",
+        "postinstall": "ng build",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
         "deploy": "sudo git push origin master && sudo git push heroku master",
-        "dev": "ng build --aot -prod && node server.js"
+        "dev": "ng build -prod && node server.js"
     },
-    "private": true,
     "dependencies": {
         "@angular/cli": "1.0.0",
         "@angular/common": "^4.0.0",

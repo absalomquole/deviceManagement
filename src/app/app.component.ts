@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Subscription }   from 'rxjs/Subscription';
 import {MailserviceService} from './mailservice.service';
 import {GetdevicedataService} from './getdevicedata.service'
-
 
 
 @Component({
@@ -18,10 +16,6 @@ export class AppComponent {
   vay:any;
   deviceData:any;
   veryberry:String;
-  private subscriptions: Subscription[] = [];
-
-
-
   constructor(private _MailserviceService: MailserviceService,private _GetdevicedataService: GetdevicedataService) {
     this.deviceData=_GetdevicedataService.getDeviceData();
     console.log("this.deviceData");
@@ -38,17 +32,8 @@ export class AppComponent {
       { name:"shubha73",class: "we534"},
       { name:"s234hubha",class: "we23"}];
   }
-
     ngOnInit(){
       console.log("const2 called");
-      console.log('initData triggered');
-      this.subscriptions.push(this._GetdevicedataService.getDeviceData()
-                        .subscribe((data) => {
-                            console.log(data)
-                        }, (err) => {
-                            console.log("error")
-                        }
-                    ));
     }
     ngOnChanges(){
       console.log("const3 called");
