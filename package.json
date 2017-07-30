@@ -11,7 +11,7 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "deploy": "sudo git push origin master && sudo git push heroku master",
-        "dev": "ng build -prod && node server.js"
+        "dev": "ng build && node server.js"
     },
     "dependencies": {
         "@angular/cli": "1.0.0",
